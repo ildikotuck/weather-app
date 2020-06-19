@@ -47,17 +47,27 @@ $('.btn').click ( function() {
 });
 
 function updateBackground() {
-    if (cel < 0) {
-        $('body').css('background','url(images/freezing.jpeg) no-repeat center center');
+    if (cel < -20) {
+        $('body').css('background-image','url(images/freezing.jpeg)');
     
-    } else if (cel > 20) {
-        $('body').css('background','url(images/sunny.jpeg) no-repeat center center');
+    } else if (cel < 10) {
+        $('body').css('background-image','url(images/freezing-zero.jpeg)');
+    
+    } else if (cel < 15) {
+        $('body').css('background-image','url(images/moderately-cold.jpeg)');
+    
+    } else if (cel < 24) {
+        $('body').css('background-image','url(images/moderately-warm.jpeg)');
     
     } else {
-        $('body').css('background','url(images/moderately-cold.jpeg) no-repeat top center');
-    }         
+        $('body').css('background-image','url(images/very-hot.jpeg)');   
     }
+};
 
+function resetColour() {
+    $('.btn').css('background-color','white');
+    $('.btn').css('color','black');
+};
 
 
 //WORKING EXAMPLE
@@ -121,8 +131,4 @@ function updateBackground() {
 //     }         
 // }
 
-function resetColour() {
-    $('.btn').css('background-color','white');
-    $('.btn').css('color','black');
-}
 
