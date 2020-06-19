@@ -1,0 +1,32 @@
+body {
+  height: 100vh;
+
+  background: url(../images/moderately-cold.jpeg) no-repeat top center;
+  background-size: cover;
+}
+
+.white-box {
+  background-color: #ffffffaa;
+  margin-top: 250px;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.cel, .far {
+  background-color: #ffffffaa;
+  display: inline-block;
+  padding: 40px;
+  margin: 40px;
+  border-radius: 5px;
+}
+
+.btn {
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+}
+
+.active {
+  background-color: green;
+  color: white;
+}
