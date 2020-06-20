@@ -1,16 +1,50 @@
 console.log("Yay it loaded");
 
-var city = 'Sydney,Au';
+var city = 'Adelaide,Au';
 var URL = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=3d2363042523c46eb86f30163a636f2c';
 
 var kelvin = 0;
+var icon = '10d';
 var cel = 0;
 var far = 0;
+
+// $( function() {
+//     var availableCities = [
+//       "Adelaide",
+//       "Antarctica",
+//       "Auckland",
+//       "Barcelona",
+//       "Beijing",
+//       "Belgium",
+//       "Bergen",
+//       "Budapest",
+//       "Bucharest",
+//       "London",
+//       "Madrid",
+//       "Malaga",
+//       "Melbourne",
+//       "Moscow",
+//       "Palma de Mallorca",
+//       "Panama City",
+//       "Rio de Janeiro",
+//       "Stockholm",
+//       "Stuttgart",
+//       "Sydney",
+//       "Oslo",
+//       "Vienna",
+//     ];
+
+//     $( "#tags" ).autocomplete({ source: availableCities 
+//     });
+// } );
 
 $.getJSON(URL, function(results){
 
     // console.log(results.main.temp);
     // console.log(URL);
+    console.log(results.weather[0].icon);
+
+    icon = results.weather[0].icon;
     kelvin = results.main.temp;
 
     cel = kelvin - 273.15;
@@ -21,25 +55,31 @@ $.getJSON(URL, function(results){
 
     $('.cel').text(cel.toFixed(1) + ' °C');
     $('.far').text(far.toFixed(1) + ' °F');
-
+    $('.weather-icon').attr('src','https://openweathermap.org/img/wn/'+icon+'@2x.png');
 });
 
 $('.btn').click ( function() {
 
     city = $(this).attr('data-city');
     $('.white-box h1').text('The current temperature in ' + $(this).text() +' is:');
-    resetColour();
-    $(this).css('background-color','green');
-    $(this).css('color','white');
+    $('.btn').removeClass('active');
+    $(this).addClass('active');
+    // $(this).css('color','white');
     var URL = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=3d2363042523c46eb86f30163a636f2c';
 
     $.getJSON(URL, function(results){
+        console.log(results.weather[0].icon);
+
+        icon = results.weather[0].icon;
+
         kelvin = results.main.temp;
         cel = kelvin - 273.15;
         far = kelvin * (9/5) - 459.67;
         $('.cel').text(cel.toFixed(1) + ' °C');
         $('.far').text(far.toFixed(1) + ' °F');
         updateBackground()
+
+        $('.weather-icon').attr('src','https://openweathermap.org/img/wn/'+icon+'@2x.png');
 
     });
 
@@ -64,13 +104,9 @@ function updateBackground() {
     }
 };
 
-function resetColour() {
-    $('.btn').css('background-color','white');
-    $('.btn').css('color','black');
-};
 
 
-//WORKING EXAMPLE
+//FIRST WORKING EXAMPLE
 // $('.adl').click ( function(){
 //     URL = 'https://api.openweathermap.org/data/2.5/weather?q=Adelaide,Au&appid=3d2363042523c46eb86f30163a636f2c';
 //     updateURL();
@@ -130,5 +166,4 @@ function resetColour() {
 //         $('body').css('background','url(images/moderately-cold.jpeg) no-repeat top center');
 //     }         
 // }
-
 

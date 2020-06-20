@@ -7,6 +7,9 @@ body {
   background-size: cover;
 }
 
+h1 {
+  font-size: 38px;
+}
 .white-box {
   background-color: #ffffffaa;
   margin-top: 200px;
@@ -14,6 +17,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   width: 80%;
+
 }
 
 .cel, .far {
@@ -31,6 +35,10 @@ body {
 }
 
 .active {
-  background-color: green;
+  background-color: #2D3047;
+  color: white;
+}
+
+.active:hover {
   color: white;
 }
