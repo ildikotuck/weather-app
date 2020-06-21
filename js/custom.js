@@ -8,55 +8,43 @@ var icon = '10d';
 var cel = 0;
 var far = 0;
 
-// $( function() {
-//     var availableCities = [
-//       "Adelaide",
-//       "Antarctica",
-//       "Auckland",
-//       "Barcelona",
-//       "Beijing",
-//       "Belgium",
-//       "Bergen",
-//       "Budapest",
-//       "Bucharest",
-//       "London",
-//       "Madrid",
-//       "Malaga",
-//       "Melbourne",
-//       "Moscow",
-//       "Palma de Mallorca",
-//       "Panama City",
-//       "Rio de Janeiro",
-//       "Stockholm",
-//       "Stuttgart",
-//       "Sydney",
-//       "Oslo",
-//       "Vienna",
-//     ];
+var freezing = 'url(images/freezing';
+var cold = 'url(images/freezing-zero';
+var chilly = 'url(images/moderately-cold';
+var warm = 'url(images/moderately-warm';
+var hot ='url(images/very-hot';
+var currentTemp ='';
 
-//     $( "#tags" ).autocomplete({ source: availableCities 
-//     });
-// } );
+getWeather();
 
-$.getJSON(URL, function(results){
 
-    // console.log(results.main.temp);
-    // console.log(URL);
-    console.log(results.weather[0].icon);
+function getWeather() {
+    $.getJSON(URL, function(results){
+        // console.log(results.weather[0].icon);
+        // console.log(results.weather[0].main);
+        icon = results.weather[0].icon;
+        kelvin = results.main.temp;
 
-    icon = results.weather[0].icon;
-    kelvin = results.main.temp;
+        cel = kelvin - 273.15;
+        far = kelvin * (9/5) - 459.67;
 
-    cel = kelvin - 273.15;
-    far = kelvin * (9/5) - 459.67;
+        $('.cel').text(cel.toFixed(1) + ' °C');
+        $('.far').text(far.toFixed(1) + ' °F');
+        $('.weather-icon').attr('src','https://openweathermap.org/img/wn/'+icon+'@2x.png');
+        
+        updateBackground();
+        rainCheck();
 
-    // console.log('Cel = '+cel);
-    // console.log('Far = '+far);
-
-    $('.cel').text(cel.toFixed(1) + ' °C');
-    $('.far').text(far.toFixed(1) + ' °F');
-    $('.weather-icon').attr('src','https://openweathermap.org/img/wn/'+icon+'@2x.png');
+        function rainCheck () {
+            if (results.weather[0].main === 'Rain') {
+                $('body').css('background-image',currentTemp+'-rain'+'.jpeg');
+            
+            } else if (results.weather[0].main === 'Drizzle') {
+                $('body').css('background-image',currentTemp+'-rain'+'.jpeg');
+            };
+        };
 });
+}
 
 $('.btn').click ( function() {
 
@@ -64,45 +52,37 @@ $('.btn').click ( function() {
     $('.white-box h1').text('The current temperature in ' + $(this).text() +' is:');
     $('.btn').removeClass('active');
     $(this).addClass('active');
-    // $(this).css('color','white');
-    var URL = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=3d2363042523c46eb86f30163a636f2c';
+    URL = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=3d2363042523c46eb86f30163a636f2c';
 
-    $.getJSON(URL, function(results){
-        console.log(results.weather[0].icon);
-
-        icon = results.weather[0].icon;
-
-        kelvin = results.main.temp;
-        cel = kelvin - 273.15;
-        far = kelvin * (9/5) - 459.67;
-        $('.cel').text(cel.toFixed(1) + ' °C');
-        $('.far').text(far.toFixed(1) + ' °F');
-        updateBackground()
-
-        $('.weather-icon').attr('src','https://openweathermap.org/img/wn/'+icon+'@2x.png');
-
-    });
-
+    getWeather ()
 
 });
 
 function updateBackground() {
     if (cel < -20) {
-        $('body').css('background-image','url(images/freezing.jpeg)');
+        $('body').css('background-image',freezing+'.jpeg)');
+        currentTemp = freezing;
     
     } else if (cel < 10) {
-        $('body').css('background-image','url(images/freezing-zero.jpeg)');
-    
+        $('body').css('background-image',cold+'.jpeg)');
+        currentTemp = cold;
+
     } else if (cel < 15) {
-        $('body').css('background-image','url(images/moderately-cold.jpeg)');
-    
+        $('body').css('background-image',chilly+'.jpeg)');
+        currentTemp = chilly;
+
     } else if (cel < 24) {
-        $('body').css('background-image','url(images/moderately-warm.jpeg)');
-    
+        $('body').css('background-image',warm+'.jpeg)');
+        currentTemp = warm;
+
     } else {
-        $('body').css('background-image','url(images/very-hot.jpeg)');   
+        $('body').css('background-image',hot+'.jpeg)');   
+        currentTemp = hot;
+
     }
 };
+
+
 
 
 
