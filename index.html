@@ -10,22 +10,54 @@
 </head>
 
 <body>
+	<div class="container">
+		<div class="row d-flex flex-row justify-content-center">
+			<div class="col-lg-8 col-md-10 col-sm-12 white-box">
+				
+				<div class="row">
+					<div class="col heading">
+					<h1>The current temperature in Adelaide is:</h1>
+					</div>
+				</div>
 
-	<div class="container text-center">
-
-		<div class="white-box align-middle">
-			<h1>The current temperature in Adelaide is:</h1>
-			<h2 class="cel">0.00</h2>
-			<img class="weather-icon" src="http://openweathermap.org/img/wn/10d@2x.png">
-			<h2 class="far">0.00</h2>
+				<div class="row justify-content-center align-items-center">
+					<div class="col-3 temp">
+						<h2 class="cel">0.00</h2>
+					</div>
+					<div class="col-2 col-sm-3 icon">
+						<img class="weather-icon" src="http://openweathermap.org/img/wn/10d@2x.png">
+					</div>
+					<div class="col-3 temp">
+						<h2 class="far">0.00</h2>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<button data-city=Adelaide,Au class="btn active">Adelaide</button>
-		<button data-city=Antarctica class="btn">Antarctica</button>
-		<button data-city=Singapore,Sg class="btn">Singapore</button>
-		<button data-city=Bergen,No class="btn">Bergen</button>
-		<button data-city=La%20Paz,Bo class="btn">La Paz</button>
+	<div class="container">
+		<div class="buttons row d-flex justify-content-center align-items-center">
+			<div class="button col-lg-2 col-md-10 col-sm-10 ">
+				<a href="#" data-city=Adelaide,Au class="btn active">Adelaide</a>
+			</div>
 
+			<div class="col-lg-2 col-md-10 col-sm-10 button">
+				<a href="#" data-city=Antarctica class="btn">Antarctica</a>
+			</div>
+
+			<div class="col-lg-2 col-md-10 col-sm-10 button">
+				<a href="#" data-city=Singapore,Sg class="btn">Singapore</a>
+			</div>
+
+			<div class="col-lg-2 col-md-10 col-sm-10 button">
+				<a href="#" data-city=Bergen,No class="btn">Bergen</a>
+			</div>
+
+			<div class="col-lg-2 col-md-10 col-sm-10 button">
+				<a href="#" data-city=La%20Paz,Bo class="btn">La Paz</a>		
+			</div>
+		</div>
+	</div>
+		
 
 		<!-- <div class="ui-widget">
 			<label for="tags">Locations: </label>
